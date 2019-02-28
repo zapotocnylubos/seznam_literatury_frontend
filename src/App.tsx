@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { ApplicationState } from "./store";
 import { Dispatch } from "redux";
 import { fetchRequest } from "./store/literature-set/actions";
 import { connect } from 'react-redux'
-import { LiteratureSetState } from "./store/literature-set/types";
 import { LiteratureSet } from "./types/literature-set";
+import Container from 'react-bootstrap/Container'
+import LiteratureGroupComponent from "./components/literature-group/literature-group.component";
+import LiteratureSetHeaderComponent from "./components/literature-set/literature-set-header.component";
 
 interface PropsFromState {
     loading: boolean
@@ -21,7 +21,7 @@ interface PropsFromDispatch {
 type AllProps = PropsFromState & PropsFromDispatch
 
 
-class App extends Component<AllProps>{
+class App extends Component<AllProps> {
 
     public componentDidMount() {
         const {data} = this.props;
@@ -32,12 +32,18 @@ class App extends Component<AllProps>{
     }
 
     render() {
+        const {loading, data} = this.props;
         return (
-            <div>
-                {this.props.loading && "Loading"}
-                {this.props.data && JSON.stringify(this.props.data)}
-            </div>
-
+            <Container>
+                {loading && "Loading..."}
+                {data && <>
+                    <LiteratureSetHeaderComponent literatureSet={data}/>
+                    <hr/>
+                    {data.literature_groups.map(literatureGroup =>
+                        <LiteratureGroupComponent literatureGroup={literatureGroup}/>
+                    )}
+                </>}
+            </Container>
         );
     }
 }
