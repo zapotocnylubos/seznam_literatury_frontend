@@ -1,15 +1,18 @@
-import { ApplicationState } from "../store/index";
+import { createSelector } from "reselect";
+import * as _ from "lodash";
 
-export const getLiteratureGroups = (state: ApplicationState) => state.literatureSet.data && state.literatureSet.data.literature_groups;
+import { ApplicationState } from "../store";
+import { getSelectedBooksInGroup } from "./book.selector";
 
 
-// isMinimumSelectedBooksCountMet(groupId) << getRequiredLiteratureForm, getRequiredLiteratureFormBooks
+// isRequiredSelectedBooksCountInGroupMet(groupId) << getRequiredLiteratureForm, getRequiredLiteratureFormBooks
 
-
-//use book.selector
-export const isMinimumLiteratureGroupSelectedBooksCountMet = (
-    state: ApplicationState,
-    {groupId}: { groupId: number }
-) => {
-
+export const getLiteratureGroup = (state: ApplicationState, {groupId}: { groupId: number }) => {
+    return _.find(_.get(state.literatureSet.data, 'literature_groups'), {id: groupId});
 };
+
+export const isRequiredSelectedBooksCountInGroupMet = createSelector(
+    [getSelectedBooksInGroup, getLiteratureGroup],
+    (selectedBooksInGroup, literatureGroup) => {
+        return selectedBooksInGroup.length >= _.get(literatureGroup, 'min_count', 0);
+    });

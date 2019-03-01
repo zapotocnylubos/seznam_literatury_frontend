@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Book } from "../../types/book";
 import { toggleSelection } from '../../store/books/actions'
 import { ApplicationState } from "../../store";
-import { isBookSelected, isMinimumBookCountMet } from '../../selectors/book.selector'
+import { isBookSelectedInGroup } from '../../selectors/book.selector'
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import classNames from 'classnames';
+import { isRequiredBookCountMet } from "../../selectors/literature-set.selector";
 
 interface ComponentProps {
     groupId: number
@@ -14,8 +15,8 @@ interface ComponentProps {
 }
 
 interface PropsFromState {
-    selected: boolean,
-    isMinimumBookCountMet: boolean
+    isBookSelectedInGroup: boolean
+    isRequiredBookCountMet: boolean
 }
 
 interface PropsFromDispatch {
@@ -26,16 +27,18 @@ type AllProps = ComponentProps & PropsFromState & PropsFromDispatch
 
 class BookContainer extends Component<AllProps> {
     render() {
-        const {groupId, isMinimumBookCountMet, selected, book, toggleSelection} = this.props;
+        const {groupId, book} = this.props;
+        const {isBookSelectedInGroup, isRequiredBookCountMet, toggleSelection} = this.props;
 
         const trClass = classNames({
-            'd-print-none': !selected
+            'd-print-none': !isBookSelectedInGroup
         });
 
         return (
             <tr className={trClass}>
                 <td className={'d-print-none'}>
-                    <Form.Check disabled={isMinimumBookCountMet && !selected} type="checkbox" defaultChecked={selected} onClick={() => toggleSelection(groupId, book)}/>
+                    <Form.Check disabled={isRequiredBookCountMet && !isBookSelectedInGroup} type="checkbox" defaultChecked={isBookSelectedInGroup}
+                                onClick={() => toggleSelection(groupId, book)}/>
                 </td>
                 <td>{4}</td>
                 <td className={'d-none d-print-block'}>{2}</td>
@@ -48,8 +51,8 @@ class BookContainer extends Component<AllProps> {
 }
 
 const mapStateToProps = (state: ApplicationState, props: ComponentProps) => ({
-    selected: isBookSelected(state, props),
-    isMinimumBookCountMet: isMinimumBookCountMet(state)
+    isBookSelectedInGroup: isBookSelectedInGroup(state, props),
+    isRequiredBookCountMet: isRequiredBookCountMet(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

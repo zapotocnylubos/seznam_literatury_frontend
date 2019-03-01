@@ -5,10 +5,15 @@ import { LiteratureSet } from "../../types/literature-set";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { getSelectedBooksCount, isMinimumBookCountMet } from '../../selectors/book.selector'
+import { getFlattenedSelectedBooks } from "../../selectors/book.selector";
 import {
-    getSelectedBooksLiteratureFormsCounts,
-    isMinimumLiteratureFormsCountsMet
+    getMaxSelectedBooksForAuthor,
+    isMaxSelectedBooksForAuthorExceeded,
+    isRequiredBookCountMet
+} from "../../selectors/literature-set.selector";
+import {
+    getRequiredLiteratureFormSelectedBooks,
+    isRequiredLiteratureFormCountMet
 } from "../../selectors/literature-form.selector";
 
 interface ComponentProps {
@@ -17,18 +22,27 @@ interface ComponentProps {
 
 interface PropsFromState {
     data: LiteratureSet | null
-    selectedBooksCount: number
-    isMinimumBookCountMet: boolean,
-    selectedBooksLiteratureFormsCounts: { [key: number]: number } | null
-    isMinimumLiteratureFormsCountsMet: { [key: number]: boolean } | null
+
+    flattenedSelectedBooksCount: number
+    isRequiredBookCountMet: boolean
+
+    maxSelectedBooksForAuthor: number
+    isMaxSelectedBooksForAuthorExceeded: boolean
+
+    getRequiredLiteratureFormSelectedBooksCount: (literatureFormId: number) => number
+    isRequiredLiteratureFormCountMet: (literatureFormId: number) => boolean
 }
 
 type AllProps = ComponentProps & PropsFromState
 
 class LiteratureSetContainer extends Component<AllProps> {
     render() {
-        const {data, selectedBooksCount, isMinimumBookCountMet, selectedBooksLiteratureFormsCounts, isMinimumLiteratureFormsCountsMet} = this.props;
+        const {data} = this.props;
         if (!data) return null;
+
+        const {flattenedSelectedBooksCount, isRequiredBookCountMet} = this.props;
+        const {getRequiredLiteratureFormSelectedBooksCount, isRequiredLiteratureFormCountMet} = this.props;
+        const {maxSelectedBooksForAuthor, isMaxSelectedBooksForAuthorExceeded} = this.props;
 
         const {required_book_count, author_max_count, required_literature_forms} = data;
 
@@ -65,20 +79,26 @@ class LiteratureSetContainer extends Component<AllProps> {
                 </h2>
                 <div className="text-center d-print-none">
                     <p className="mb-0">
-                        Požadovaný počet knih: <span
-                        className={isMinimumBookCountMet ? 'text-success' : 'text-danger'}>({selectedBooksCount} / {required_book_count})</span>
+                        Požadovaný počet knih:&nbsp;
+                        <span className={isRequiredBookCountMet ? 'text-success' : 'text-danger'}>
+                        ({flattenedSelectedBooksCount} / {required_book_count})
+                    </span>
                     </p>
-                    <p className="mb-0">Maximální počet knih od stejného autora: {author_max_count}</p>
+                    <p className="mb-0">Maximální počet knih od stejného autora:&nbsp;
+                        <span className={!isMaxSelectedBooksForAuthorExceeded ? 'text-success' : 'text-danger'}>
+                            ({maxSelectedBooksForAuthor} / {author_max_count})
+                        </span>
+                    </p>
 
                     {required_literature_forms.length > 0 && <p className="mb-0">
                         Minimální počet literárních forem:&nbsp;
                         {required_literature_forms.map(({literature_form_id, literature_form, min_count}, index) =>
                             <span key={index}>
-                                {literature_form}:
+                                {literature_form}:&nbsp;
                                 <span
-                                    className={isMinimumLiteratureFormsCountsMet && isMinimumLiteratureFormsCountsMet[literature_form_id] ? 'text-success' : 'text-danger'}>
-                                    ({selectedBooksLiteratureFormsCounts && selectedBooksLiteratureFormsCounts[literature_form_id] + " / "}{min_count})
-                                </span>{index != required_literature_forms.length - 1 && ", "}
+                                    className={isRequiredLiteratureFormCountMet(literature_form_id) ? 'text-success' : 'text-danger'}>
+                                    ({getRequiredLiteratureFormSelectedBooksCount(literature_form_id)} / {min_count})
+                                </span>{index !== required_literature_forms.length - 1 && ", "}
                             </span>
                         )}
                     </p>}
@@ -90,10 +110,15 @@ class LiteratureSetContainer extends Component<AllProps> {
 
 const mapStateToProps = (state: ApplicationState) => ({
     data: state.literatureSet.data,
-    selectedBooksCount: getSelectedBooksCount(state),
-    isMinimumBookCountMet: isMinimumBookCountMet(state),
-    selectedBooksLiteratureFormsCounts: getSelectedBooksLiteratureFormsCounts(state),
-    isMinimumLiteratureFormsCountsMet: isMinimumLiteratureFormsCountsMet(state)
+
+    flattenedSelectedBooksCount: getFlattenedSelectedBooks(state).length,
+    isRequiredBookCountMet: isRequiredBookCountMet(state),
+
+    maxSelectedBooksForAuthor: getMaxSelectedBooksForAuthor(state),
+    isMaxSelectedBooksForAuthorExceeded: isMaxSelectedBooksForAuthorExceeded(state),
+
+    getRequiredLiteratureFormSelectedBooksCount: (literatureFormId: number) => getRequiredLiteratureFormSelectedBooks(state, {literatureFormId}).length,
+    isRequiredLiteratureFormCountMet: (literatureFormId: number) => isRequiredLiteratureFormCountMet(state, {literatureFormId}),
 });
 
 export default connect(
