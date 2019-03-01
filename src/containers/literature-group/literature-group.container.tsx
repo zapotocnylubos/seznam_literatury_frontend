@@ -33,7 +33,7 @@ class LiteratureGroupContainer extends Component<AllProps> {
                         ({getSelectedBooksInGroupCount} / {literatureGroup.min_count})
                     </span>
                 </small>
-                <Table size="sm">
+                <Table size="sm" responsive>
                     <thead>
                     <tr>
                         <th className={'d-print-none'}>Vybrat</th>
