@@ -48,33 +48,35 @@ class LiteratureSetContainer extends Component<AllProps> {
 
         return (
             <div>
-                <div className={'col-sm-6'}>
-                    <Form.Group as={Row}>
-                        <Col sm={6}>
-                            <Form.Label>Jméno a příjmení:</Form.Label>
-                        </Col>
-                        <Col sm={6}>
-                            <Form.Control size="sm" type="text"/>
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row}>
-                        <Col sm={6}>
-                            <Form.Label>Třída:</Form.Label>
-                        </Col>
-                        <Col sm={6}>
-                            <Form.Control size="sm" type="text"/>
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row}>
-                        <Col sm={6}>
-                            <Form.Label>Školní rok:</Form.Label>
-                        </Col>
-                        <Col sm={6}>
-                            <Form.Control size="sm" type="text"/>
-                        </Col>
-                    </Form.Group>
-                </div>
-                <h2 className={'text-center my-2'}>
+                <Row className={'mt-4'}>
+                    <Col sm={8}>
+                        <Form.Group as={Row}>
+                            <Col sm={5}>
+                                <Form.Label>Jméno a příjmení:</Form.Label>
+                            </Col>
+                            <Col sm={7}>
+                                <Form.Control size="sm" type="text"/>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row}>
+                            <Col sm={5}>
+                                <Form.Label>Třída:</Form.Label>
+                            </Col>
+                            <Col sm={7}>
+                                <Form.Control size="sm" type="text"/>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row}>
+                            <Col sm={5}>
+                                <Form.Label>Školní rok:</Form.Label>
+                            </Col>
+                            <Col sm={7}>
+                                <Form.Control size="sm" type="text"/>
+                            </Col>
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <h2 className={'text-center my-4'}>
                     <strong>Seznam děl pro ústní část maturitní zkoušky</strong>
                 </h2>
                 <div className="text-center d-print-none">
