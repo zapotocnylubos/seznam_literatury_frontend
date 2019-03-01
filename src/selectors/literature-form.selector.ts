@@ -28,15 +28,23 @@ export const getSelectedBooksLiteratureFormsCounts = createSelector(
 export const isMinimumLiteratureFormsCountsMet = createSelector(
     [getSelectedBooksLiteratureFormsCounts, getRequiredLiteratureForms],
     (selectedBooksLiteratureFormsCounts, requiredLiteratureForms) => {
-        if (!selectedBooksLiteratureFormsCounts || !requiredLiteratureForms) {
+        if (!selectedBooksLiteratureFormsCounts) {
+            return null;
+        }
+
+        if(!requiredLiteratureForms) {
             return null;
         }
 
         return Object.keys(selectedBooksLiteratureFormsCounts).reduce((result, literatureFormId) => {
-            console.log(requiredLiteratureForms, literatureFormId, requiredLiteratureForms[+literatureFormId].min_count)
+            const literatureForm = requiredLiteratureForms.find(form => form.literature_form_id === +literatureFormId);
+            if(!literatureForm) {
+                return result;
+            }
+
             return {
                 ...result,
-                [+literatureFormId]: selectedBooksLiteratureFormsCounts[+literatureFormId] >= requiredLiteratureForms[+literatureFormId].min_count
+                [+literatureFormId]: selectedBooksLiteratureFormsCounts[+literatureFormId] >= literatureForm.min_count
             }
         }, {} as { [key: number]: boolean });
     });
