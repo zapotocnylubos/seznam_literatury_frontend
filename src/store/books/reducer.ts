@@ -18,7 +18,7 @@ const reducer: Reducer<BooksState> = (state = initialState, action) => {
                     selectedBooks: {
                         ...state.selectedBooks,
                         [groupId]: group.filter(selectedBook =>
-                            selectedBook.literature_groups_has_books_id === book.literature_groups_has_books_id
+                            selectedBook.literature_groups_has_books_id !== book.literature_groups_has_books_id
                         )
                     }
                 }
