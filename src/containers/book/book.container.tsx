@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Book } from "../../types/book";
 import { toggleSelection } from '../../store/books/actions'
 import { ApplicationState } from "../../store";
-import { isBookSelectedInGroup } from '../../selectors/book.selector'
+import { getBookIndex, getSelectedBookIndex, isBookSelectedInGroup } from '../../selectors/book.selector'
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
@@ -17,6 +17,9 @@ interface ComponentProps {
 interface PropsFromState {
     isBookSelectedInGroup: boolean
     isRequiredBookCountMet: boolean
+
+    getBookIndex: (book: Book) => number
+    getSelectedBookIndex: (book: Book) => number
 }
 
 interface PropsFromDispatch {
@@ -28,7 +31,8 @@ type AllProps = ComponentProps & PropsFromState & PropsFromDispatch
 class BookContainer extends Component<AllProps> {
     render() {
         const {groupId, book} = this.props;
-        const {isBookSelectedInGroup, isRequiredBookCountMet, toggleSelection} = this.props;
+        const {isBookSelectedInGroup, isRequiredBookCountMet, getBookIndex, getSelectedBookIndex} = this.props;
+        const {toggleSelection} = this.props;
 
         const trClass = classNames({
             'd-print-none': !isBookSelectedInGroup
@@ -40,8 +44,8 @@ class BookContainer extends Component<AllProps> {
                     <Form.Check disabled={isRequiredBookCountMet && !isBookSelectedInGroup} type="checkbox" defaultChecked={isBookSelectedInGroup}
                                 onClick={() => toggleSelection(groupId, book)}/>
                 </td>
-                <td>{4}</td>
-                <td className={'d-none d-print-block'}>{2}</td>
+                <td>{getBookIndex(book) + 1}</td>
+                <td className={'d-none d-print-block'}>{getSelectedBookIndex(book) + 1}</td>
                 <td>{book.author}</td>
                 <td>{book.title}</td>
                 <td>{book.literature_form}</td>
@@ -52,7 +56,11 @@ class BookContainer extends Component<AllProps> {
 
 const mapStateToProps = (state: ApplicationState, props: ComponentProps) => ({
     isBookSelectedInGroup: isBookSelectedInGroup(state, props),
-    isRequiredBookCountMet: isRequiredBookCountMet(state)
+    isRequiredBookCountMet: isRequiredBookCountMet(state),
+
+    getBookIndex: (book: Book) => getBookIndex(state, {book}),
+    getSelectedBookIndex: (book: Book) => getSelectedBookIndex(state, {book})
+
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
