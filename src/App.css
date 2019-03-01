@@ -1,0 +1,11 @@
+@media print {
+    button {
+        display: none !important;
+    }
+    input,
+    textarea {
+        border: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+}

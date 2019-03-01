@@ -6,6 +6,7 @@ import { isBookSelected } from '../../selectors/book/book.selector'
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
+import classNames from 'classnames';
 
 interface ComponentProps {
     groupId: number
@@ -25,14 +26,21 @@ type AllProps = ComponentProps & PropsFromState & PropsFromDispatch
 class BookContainer extends Component<AllProps> {
     render() {
         const {groupId, selected, book, toggleSelection} = this.props;
+
+        const trClass = classNames({
+            'd-print-none': !selected
+        });
+
         return (
-            <tr>
-                <td>
+            <tr className={trClass}>
+                <td className={'d-print-none'}>
                     <Form.Check type="checkbox" defaultChecked={selected} onClick={() => toggleSelection(groupId, book)}/>
                 </td>
                 <td>{4}</td>
+                <td className={'d-none d-print-block'}>{2}</td>
                 <td>{book.author}</td>
                 <td>{book.title}</td>
+                <td>{book.literature_form}</td>
             </tr>
         )
     }

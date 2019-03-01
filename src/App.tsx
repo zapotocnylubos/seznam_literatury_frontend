@@ -7,6 +7,8 @@ import { LiteratureSet } from "./types/literature-set";
 import Container from 'react-bootstrap/Container'
 import LiteratureSetContainer from './containers/literature-set/literature-set.container'
 
+import './App.css';
+
 interface PropsFromState {
     loading: boolean
     data: LiteratureSet | null

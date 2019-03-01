@@ -5,6 +5,7 @@ import { LiteratureSet } from "../../types/literature-set";
 import Container from "react-bootstrap/Container";
 import LiteratureGroupContainer from "../literature-group/literature-group.container";
 import LiteratureSetHeaderContainer from "./literature-set-header.container";
+import LiteratureSetFooterComponent from "../../components/literature-set-footer.component";
 
 interface PropsFromState {
     loading: boolean
@@ -27,6 +28,8 @@ class LiteratureSetContainer extends Component<AllProps> {
                     {data.literature_groups.map((literatureGroup, index) =>
                         <LiteratureGroupContainer key={index} literatureGroup={literatureGroup}/>
                     )}
+                    <hr/>
+                    <LiteratureSetFooterComponent/>
                 </>}
             </Container>
         )
