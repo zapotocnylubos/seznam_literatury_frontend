@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import Table from 'react-bootstrap/Table'
+import { ApplicationState } from "../../store";
+import { connect } from "react-redux";
+import Table from "react-bootstrap/Table";
+import BookContainer from "../book/book.container";
 import { LiteratureGroup } from "../../types/literature-group";
-import BookComponent from "../book/book.component";
 
 interface ComponentProps {
     literatureGroup: LiteratureGroup
 }
 
-type AllProps = ComponentProps
+interface PropsFromState {
+    // selected: boolean
+}
 
 
-class LiteratureGroupComponent extends Component<AllProps> {
+type AllProps = ComponentProps & PropsFromState
+
+class LiteratureGroupContainer extends Component<AllProps> {
     render() {
-        const { literatureGroup } = this.props;
+        const {literatureGroup} = this.props;
         return (
             <div>
                 <h4>{literatureGroup.title}</h4>
@@ -26,13 +32,16 @@ class LiteratureGroupComponent extends Component<AllProps> {
                     </tr>
                     </thead>
                     <tbody>
-                    {literatureGroup.books.map(book => <BookComponent book={book}/>)}
+                    {literatureGroup.books.map((book, index) => <BookContainer key={index} groupId={literatureGroup.id} book={book}/>)}
                     </tbody>
                 </Table>
             </div>
-
-        );
+        )
     }
 }
 
-export default LiteratureGroupComponent
+const mapStateToProps = (state: ApplicationState, props: ComponentProps) => ({});
+
+export default connect(
+    mapStateToProps
+)(LiteratureGroupContainer)

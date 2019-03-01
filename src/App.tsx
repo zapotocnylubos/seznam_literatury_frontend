@@ -5,8 +5,7 @@ import { fetchRequest } from "./store/literature-set/actions";
 import { connect } from 'react-redux'
 import { LiteratureSet } from "./types/literature-set";
 import Container from 'react-bootstrap/Container'
-import LiteratureGroupComponent from "./components/literature-group/literature-group.component";
-import LiteratureSetHeaderComponent from "./components/literature-set/literature-set-header.component";
+import LiteratureSetContainer from './containers/literature-set/literature-set.container'
 
 interface PropsFromState {
     loading: boolean
@@ -22,7 +21,6 @@ type AllProps = PropsFromState & PropsFromDispatch
 
 
 class App extends Component<AllProps> {
-
     public componentDidMount() {
         const {data} = this.props;
 
@@ -32,17 +30,12 @@ class App extends Component<AllProps> {
     }
 
     render() {
-        const {loading, data} = this.props;
+        const {loading, data, errors} = this.props;
         return (
             <Container>
-                {loading && "Loading..."}
-                {data && <>
-                    <LiteratureSetHeaderComponent literatureSet={data}/>
-                    <hr/>
-                    {data.literature_groups.map(literatureGroup =>
-                        <LiteratureGroupComponent literatureGroup={literatureGroup}/>
-                    )}
-                </>}
+                {loading && "Načítání..."}
+                {errors && "Nahrávání neproběhlo úspěšně"}
+                {data && <LiteratureSetContainer />}
             </Container>
         );
     }

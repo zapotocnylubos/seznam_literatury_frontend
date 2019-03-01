@@ -10,6 +10,6 @@ export enum LiteratureSetActionTypes {
 // https://github.com/piotrwitek/react-redux-typescript-guide#state-with-type-level-immutability
 export interface LiteratureSetState {
     readonly loading: boolean
-    readonly data: (LiteratureSet | null)
+    readonly data: LiteratureSet | null
     readonly errors?: string
 }

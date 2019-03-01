@@ -10,6 +10,9 @@ const store = configureStore({
     literatureSet: {
         loading: false,
         data: null
+    },
+    books: {
+        selectedBooks: []
     }
 });
 
