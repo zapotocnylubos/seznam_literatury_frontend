@@ -1,7 +1,15 @@
 import { ApplicationState } from "../store/index";
-import { Book } from "../types/book";
 
-export const getGroupErrors = (
+export const getLiteratureGroups = (state: ApplicationState) => state.literatureSet.data && state.literatureSet.data.literature_groups;
+
+
+// isMinimumSelectedBooksCountMet(groupId) << getRequiredLiteratureForm, getRequiredLiteratureFormBooks
+
+
+//use book.selector
+export const isMinimumLiteratureGroupSelectedBooksCountMet = (
     state: ApplicationState,
-    {groupId, book}: { groupId: number, book: Book } // container props
-) => state.books.selectedBooks[groupId] && state.books.selectedBooks[groupId].includes(book);
+    {groupId}: { groupId: number }
+) => {
+
+};

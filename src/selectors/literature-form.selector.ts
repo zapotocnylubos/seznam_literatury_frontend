@@ -1,8 +1,28 @@
-import { ApplicationState } from "../store";
+import * as _ from 'lodash';
 import { createSelector } from "reselect";
-import { getSelectedBooks } from "./book.selector";
+import { ApplicationState } from "../store";
 
-export const getRequiredLiteratureForms = (state: ApplicationState) => state.literatureSet.data && state.literatureSet.data.required_literature_forms;
+import { getFlattenedSelectedBooks } from './book.selector';
+
+export const getRequiredLiteratureForm = (state: ApplicationState, {literatureFormId}: { literatureFormId: number }) => {
+    return _.find(_.get(state.literatureSet.data, 'required_literature_forms'), {literature_form_id: literatureFormId});
+};
+
+export const getRequiredLiteratureFormSelectedBooks = createSelector(
+    [getRequiredLiteratureForm, getFlattenedSelectedBooks],
+    (requiredLiteratureForm, flattenedSelectedBooks) => {
+        return _.filter(flattenedSelectedBooks, {literature_form_id: _.get(requiredLiteratureForm, 'literature_form_id')})
+    });
+
+export const isRequiredLiteratureFormCountMet = createSelector(
+    [getRequiredLiteratureForm, getRequiredLiteratureFormSelectedBooks],
+    (requiredLiteratureForm, requiredLiteratureFormSelectedBooks) => {
+        return requiredLiteratureFormSelectedBooks.length >= _.get(requiredLiteratureForm, 'min_count', 0);
+    });
+
+// getRequiredLiteratureForm(literatureFormId)   // pri hledani pouzit metodu find
+// getRequiredLiteratureFormSelectedBooks(literatureFormId) << getRequiredLiteratureForm, book.getSelectedBooks
+// isRequiredLiteratureFormCountMet(literatureFormId) << getRequiredLiteratureForm, getRequiredLiteratureFormBooks
 
 export const getSelectedBooksLiteratureFormsCounts = createSelector(
     [getSelectedBooks, getRequiredLiteratureForms],
@@ -32,13 +52,13 @@ export const isMinimumLiteratureFormsCountsMet = createSelector(
             return null;
         }
 
-        if(!requiredLiteratureForms) {
+        if (!requiredLiteratureForms) {
             return null;
         }
 
         return Object.keys(selectedBooksLiteratureFormsCounts).reduce((result, literatureFormId) => {
             const literatureForm = requiredLiteratureForms.find(form => form.literature_form_id === +literatureFormId);
-            if(!literatureForm) {
+            if (!literatureForm) {
                 return result;
             }
 
