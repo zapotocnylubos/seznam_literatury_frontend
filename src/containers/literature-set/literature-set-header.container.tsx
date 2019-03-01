@@ -5,6 +5,8 @@ import { LiteratureSet } from "../../types/literature-set";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button'
+
 import { getFlattenedSelectedBooks } from "../../selectors/book.selector";
 import {
     getMaxSelectedBooksForAuthor,
@@ -74,6 +76,9 @@ class LiteratureSetContainer extends Component<AllProps> {
                                 <Form.Control size="sm" type="text"/>
                             </Col>
                         </Form.Group>
+                    </Col>
+                    <Col sm={4} className={'d-flex align-items-center'}>
+                        <Button onClick={window.print} className={'mx-auto'}><i className="fas fa-print"></i> Vytisknout</Button>
                     </Col>
                 </Row>
                 <h2 className={'text-center my-4'}>

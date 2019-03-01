@@ -41,8 +41,8 @@ class BookContainer extends Component<AllProps> {
         return (
             <tr className={trClass}>
                 <td className={'d-print-none'}>
-                    <Form.Check disabled={isRequiredBookCountMet && !isBookSelectedInGroup} type="checkbox" defaultChecked={isBookSelectedInGroup}
-                                onClick={() => toggleSelection(groupId, book)}/>
+                    <Form.Check disabled={isRequiredBookCountMet && !isBookSelectedInGroup} type="checkbox" checked={isBookSelectedInGroup}
+                                onChange={() => toggleSelection(groupId, book)}/>
                 </td>
                 <td>{getBookIndex(book) + 1}</td>
                 <td className={'d-none d-print-block'}>{getSelectedBookIndex(book) + 1}</td>
