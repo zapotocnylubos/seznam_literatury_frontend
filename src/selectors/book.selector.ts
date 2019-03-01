@@ -23,10 +23,16 @@ export const getFlattenedBooks = (state: ApplicationState) => _.reduce(
 
 
 export const getBookIndex = createSelector(
-    [getFlattenedBooks, (state: ApplicationState, {book}: {book: Book}) => book],
+    [getFlattenedBooks, (state: ApplicationState, {book}: { book: Book }) => book],
     (flattenedBooks, book) => _.findIndex(flattenedBooks, book));
 
 
 export const getSelectedBookIndex = createSelector(
-    [getFlattenedSelectedBooks, (state: ApplicationState, {book}: {book: Book}) => book],
-    (flattenedSelectedBooks, book) => _.findIndex(flattenedSelectedBooks, book));
+    [getFlattenedSelectedBooks, getFlattenedBooks, (state: ApplicationState, {book}: { book: Book }) => book],
+    (flattenedSelectedBooks, flattenedBooks, book) => {
+        return _.findIndex(
+            _.sortBy(flattenedSelectedBooks, selectedBook => {
+                return flattenedBooks.indexOf(selectedBook)
+            }),
+            book);
+    });
