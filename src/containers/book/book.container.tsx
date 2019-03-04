@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Book } from "../../types/book";
 import { toggleSelection } from '../../store/books/actions'
 import { ApplicationState } from "../../store";
-import { getBookIndex, getSelectedBookIndex, isBookSelectedInGroup } from '../../selectors/book.selector'
+import { getBookIndex } from '../../selectors/book.selector'
+import { getSelectedBookIndex, isBookSelectedInGroup } from '../../selectors/selected-book.selector'
 import { Dispatch } from "redux";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
@@ -41,7 +42,8 @@ class BookContainer extends Component<AllProps> {
         return (
             <tr className={trClass}>
                 <td className={'d-print-none'}>
-                    <Form.Check disabled={isRequiredBookCountMet && !isBookSelectedInGroup} type="checkbox" checked={isBookSelectedInGroup}
+                    <Form.Check disabled={isRequiredBookCountMet && !isBookSelectedInGroup} type="checkbox"
+                                checked={isBookSelectedInGroup}
                                 onChange={() => toggleSelection(groupId, book)}/>
                 </td>
                 <td>{getBookIndex(book) + 1}</td>

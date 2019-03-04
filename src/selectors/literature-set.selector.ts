@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { createSelector } from "reselect";
 import { ApplicationState } from "../store";
 
-import { getFlattenedSelectedBooks } from "./book.selector";
+import { getFlattenedSelectedBooks } from "./selected-book.selector";
 
 
 export const getRequiredBookCount = (state: ApplicationState) => _.get(state.literatureSet.data, 'required_book_count');
@@ -10,7 +10,7 @@ export const getMaxSelectedBookCountForAuthor = (state: ApplicationState) => _.g
 
 export const isRequiredBookCountMet = createSelector(
     [getFlattenedSelectedBooks, getRequiredBookCount],
-    (flattenedSelectedBooks, requiredBookCount) => flattenedSelectedBooks.length === requiredBookCount);
+    (flattenedSelectedBooks, requiredBookCount) => _.size(flattenedSelectedBooks) === requiredBookCount);
 
 export const getMaxSelectedBooksForAuthor = createSelector(
     [getFlattenedSelectedBooks],

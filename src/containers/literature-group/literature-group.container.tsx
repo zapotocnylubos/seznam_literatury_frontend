@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Table from "react-bootstrap/Table";
 import BookContainer from "../book/book.container";
 import { LiteratureGroup } from "../../types/literature-group";
-import { getSelectedBooksInGroup } from "../../selectors/book.selector";
+import { getSelectedBooksInGroup } from "../../selectors/selected-book.selector";
 import { isRequiredSelectedBooksCountInGroupMet } from "../../selectors/literature-group.selector";
 
 interface ComponentProps {

@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button'
 
-import { getFlattenedSelectedBooks } from "../../selectors/book.selector";
+import { getFlattenedSelectedBooks } from "../../selectors/selected-book.selector";
 import {
     getMaxSelectedBooksForAuthor,
     isMaxSelectedBooksForAuthorExceeded,
@@ -17,6 +17,8 @@ import {
     getRequiredLiteratureFormSelectedBooks,
     isRequiredLiteratureFormCountMet
 } from "../../selectors/literature-form.selector";
+import { isFormValid } from "../../selectors/form-errors.selector";
+import classNames from "classnames";
 
 interface ComponentProps {
     // literatureGroup: LiteratureGroup
@@ -24,6 +26,8 @@ interface ComponentProps {
 
 interface PropsFromState {
     data: LiteratureSet | null
+
+    isFormValid: boolean,
 
     flattenedSelectedBooksCount: number
     isRequiredBookCountMet: boolean
@@ -42,11 +46,17 @@ class LiteratureSetContainer extends Component<AllProps> {
         const {data} = this.props;
         if (!data) return null;
 
+        const {isFormValid} = this.props;
         const {flattenedSelectedBooksCount, isRequiredBookCountMet} = this.props;
         const {getRequiredLiteratureFormSelectedBooksCount, isRequiredLiteratureFormCountMet} = this.props;
         const {maxSelectedBooksForAuthor, isMaxSelectedBooksForAuthorExceeded} = this.props;
 
         const {required_book_count, author_max_count, required_literature_forms} = data;
+
+        const validClass = classNames({
+            'text-danger text-center': !isFormValid,
+            'd-none': isFormValid
+        });
 
         return (
             <div>
@@ -84,6 +94,7 @@ class LiteratureSetContainer extends Component<AllProps> {
                 <h2 className={'text-center my-4'}>
                     <strong>Seznam děl pro ústní část maturitní zkoušky</strong>
                 </h2>
+                <p className={validClass}>{!isFormValid && "Tento formulář není kompletní"}</p>
                 <div className="text-center d-print-none">
                     <p className="mb-0">
                         Požadovaný počet knih:&nbsp;
@@ -117,6 +128,8 @@ class LiteratureSetContainer extends Component<AllProps> {
 
 const mapStateToProps = (state: ApplicationState) => ({
     data: state.literatureSet.data,
+
+    isFormValid: isFormValid(state),
 
     flattenedSelectedBooksCount: getFlattenedSelectedBooks(state).length,
     isRequiredBookCountMet: isRequiredBookCountMet(state),
