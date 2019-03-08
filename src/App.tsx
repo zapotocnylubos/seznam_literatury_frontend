@@ -37,7 +37,7 @@ class App extends Component<AllProps> {
             <Container>
                 {loading && "Načítání..."}
                 {errors && "Nahrávání neproběhlo úspěšně"}
-                {data && <LiteratureSetContainer />}
+                {data && <LiteratureSetContainer/>}
             </Container>
         );
     }

@@ -1,9 +1,8 @@
-import { Store, createStore, applyMiddleware } from 'redux'
+import { applyMiddleware, createStore, Store } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 // We'll be using Redux Devtools. We can use the `composeWithDevTools()`
 // directive so we can pass our middleware along with it
 import { composeWithDevTools } from 'redux-devtools-extension'
-
 // Import the state interface and our combined reducers/sagas.
 import { ApplicationState, rootReducer, rootSaga } from './store'
 
