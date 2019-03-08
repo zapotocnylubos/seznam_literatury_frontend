@@ -61,37 +61,37 @@ class LiteratureSetContainer extends Component<AllProps> {
         return (
             <div>
                 <Row className={'d-none d-print-flex pb-3'}>
-                    <Col sm={3} style={{textAlign: 'center'}}>
+                    <Col xs={3} className={'text-center'}>
                         <img style={{maxHeight: '75px'}} src={logo} alt="DELTA logo"/>
                     </Col>
-                    <Col sm={9} className={'d-flex align-items-center text-center'}>
-                        DELTA - Střední škola informatiky a ekonomie, Základní škola <br/>
+                    <Col xs={9} className={'d-inline-flex align-items-center text-center'}>
+                        DELTA - Střední škola informatiky a ekonomie, Základní škola<br/>
                         a Mateřská škola, s.r.o., Ke Kamenci 151, Pardubice
                     </Col>
                 </Row>
                 <Row className={'mt-4'}>
                     <Col sm={8}>
-                        <Form.Group as={Row}>
-                            <Col sm={5}>
+                        <Form.Group as={Row} className={'mb-1'}>
+                            <Col xs={5}>
                                 <Form.Label>Jméno a příjmení:</Form.Label>
                             </Col>
-                            <Col sm={7}>
+                            <Col xs={7}>
                                 <Form.Control size="sm" type="text"/>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row}>
-                            <Col sm={5}>
+                        <Form.Group as={Row} className={'mb-1'}>
+                            <Col xs={5}>
                                 <Form.Label>Třída:</Form.Label>
                             </Col>
-                            <Col sm={7}>
+                            <Col xs={7}>
                                 <Form.Control size="sm" type="text"/>
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row}>
-                            <Col sm={5}>
+                        <Form.Group as={Row} className={'mb-1'}>
+                            <Col xs={5}>
                                 <Form.Label>Školní rok:</Form.Label>
                             </Col>
-                            <Col sm={7}>
+                            <Col xs={7}>
                                 <Form.Control size="sm" type="text"/>
                             </Col>
                         </Form.Group>
@@ -100,17 +100,17 @@ class LiteratureSetContainer extends Component<AllProps> {
                         {!isFormValid && <OverlayTrigger
                             placement="bottom"
                             overlay={
-                                <Tooltip id={`tooltip-print`}>
+                                <Tooltip id={`tooltip-print`} className={'d-print-none'}>
                                     Tento formulář <strong>není kompletní</strong>.
                                 </Tooltip>
                             }>
                             <Button variant="warning" className={'mx-auto'}>
-                                <i className="fas fa-print"></i> Vytisknout
+                                <i className="fas fa-print"/> Vytisknout
                             </Button>
                         </OverlayTrigger>}
 
                         {isFormValid && <Button onClick={window.print} variant="success" className={'mx-auto'}>
-                            <i className="fas fa-print"></i> Vytisknout
+                            <i className="fas fa-print"/> Vytisknout
                         </Button>}
                     </Col>
                 </Row>
