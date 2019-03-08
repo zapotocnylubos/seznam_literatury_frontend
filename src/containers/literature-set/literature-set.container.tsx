@@ -25,7 +25,7 @@ class LiteratureSetContainer extends Component<AllProps> {
                 {errors && "Nahrávání nebylo uspěšné"}
                 {data && <>
                     <LiteratureSetHeaderContainer/>
-                    <hr/>
+                    <hr className={'d-print-none'}/>
                     {data.literature_groups.map((literatureGroup, index) =>
                         <LiteratureGroupContainer key={index} literatureGroup={literatureGroup}/>
                     )}

@@ -10,7 +10,7 @@ export const getMaxSelectedBookCountForAuthor = (state: ApplicationState) => _.g
 
 export const isRequiredBookCountMet = createSelector(
     [getFlattenedSelectedBooks, getRequiredBookCount],
-    (flattenedSelectedBooks, requiredBookCount) => _.size(flattenedSelectedBooks) === requiredBookCount);
+    (flattenedSelectedBooks, requiredBookCount) => _.size(flattenedSelectedBooks) === _.toNumber(requiredBookCount));
 
 export const getMaxSelectedBooksForAuthor = createSelector(
     [getFlattenedSelectedBooks],

@@ -35,16 +35,28 @@ class BookContainer extends Component<AllProps> {
         const {isBookSelectedInGroup, isRequiredBookCountMet, getBookIndex, getSelectedBookIndex} = this.props;
         const {toggleSelection} = this.props;
 
+        const canToggleSelection = isRequiredBookCountMet ? isBookSelectedInGroup : true;
+
         const trClass = classNames({
-            'd-print-none': !isBookSelectedInGroup
+            'd-print-none': !isBookSelectedInGroup,
+            'table-active': isBookSelectedInGroup
         });
 
+        const trStyles = {
+            ...canToggleSelection && {cursor: 'pointer'}
+        };
+
         return (
-            <tr className={trClass}>
+            <tr className={trClass}
+                style={trStyles}
+                onClick={() => canToggleSelection && toggleSelection(groupId, book)}>
                 <td className={'d-print-none'}>
-                    <Form.Check disabled={isRequiredBookCountMet && !isBookSelectedInGroup} type="checkbox"
+                    <Form.Check disabled={!canToggleSelection}
+                                type="checkbox"
+                                className={'d-flex'}
                                 checked={isBookSelectedInGroup}
-                                onChange={() => toggleSelection(groupId, book)}/>
+                                onChange={() => toggleSelection(groupId, book)}
+                                onClick={(event: any) => event.stopPropagation()}/>
                 </td>
                 <td>{getBookIndex(book) + 1}</td>
                 <td className={'d-none d-print-block'}>{getSelectedBookIndex(book) + 1}</td>

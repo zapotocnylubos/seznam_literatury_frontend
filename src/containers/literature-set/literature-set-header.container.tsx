@@ -19,10 +19,10 @@ import {
 } from "../../selectors/literature-form.selector";
 import { isFormValid } from "../../selectors/form-errors.selector";
 import classNames from "classnames";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
-interface ComponentProps {
-    // literatureGroup: LiteratureGroup
-}
+import logo from './delta-logo.png';
 
 interface PropsFromState {
     data: LiteratureSet | null
@@ -39,7 +39,7 @@ interface PropsFromState {
     isRequiredLiteratureFormCountMet: (literatureFormId: number) => boolean
 }
 
-type AllProps = ComponentProps & PropsFromState
+type AllProps = PropsFromState
 
 class LiteratureSetContainer extends Component<AllProps> {
     render() {
@@ -60,6 +60,15 @@ class LiteratureSetContainer extends Component<AllProps> {
 
         return (
             <div>
+                <Row className={'d-none d-print-flex pb-3'}>
+                    <Col sm={3} style={{textAlign: 'center'}}>
+                        <img style={{maxHeight: '75px'}} src={logo} alt="DELTA logo"/>
+                    </Col>
+                    <Col sm={9} className={'d-flex align-items-center text-center'}>
+                        DELTA - Střední škola informatiky a ekonomie, Základní škola <br/>
+                        a Mateřská škola, s.r.o., Ke Kamenci 151, Pardubice
+                    </Col>
+                </Row>
                 <Row className={'mt-4'}>
                     <Col sm={8}>
                         <Form.Group as={Row}>
@@ -88,10 +97,24 @@ class LiteratureSetContainer extends Component<AllProps> {
                         </Form.Group>
                     </Col>
                     <Col sm={4} className={'d-flex align-items-center'}>
-                        <Button onClick={window.print} className={'mx-auto'}><i className="fas fa-print"></i> Vytisknout</Button>
+                        {!isFormValid && <OverlayTrigger
+                            placement="bottom"
+                            overlay={
+                                <Tooltip id={`tooltip-print`}>
+                                    Tento formulář <strong>není kompletní</strong>.
+                                </Tooltip>
+                            }>
+                            <Button variant="warning" className={'mx-auto'}>
+                                <i className="fas fa-print"></i> Vytisknout
+                            </Button>
+                        </OverlayTrigger>}
+
+                        {isFormValid && <Button onClick={window.print} variant="success" className={'mx-auto'}>
+                            <i className="fas fa-print"></i> Vytisknout
+                        </Button>}
                     </Col>
                 </Row>
-                <h2 className={'text-center my-4'}>
+                <h2 className={'text-center my-4'} id="title">
                     <strong>Seznam děl pro ústní část maturitní zkoušky</strong>
                 </h2>
                 <p className={validClass}>{!isFormValid && "Tento formulář není kompletní"}</p>

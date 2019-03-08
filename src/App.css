@@ -2,10 +2,24 @@
     button {
         display: none !important;
     }
+
     input,
     textarea {
         border: none !important;
         box-shadow: none !important;
         outline: none !important;
+    }
+
+    h2#title {
+        margin-top: 0 !important;
+        font-size: 1.5rem;
+    }
+
+    h4 {
+        font-size: 1rem;
+    }
+
+    table {
+        font-size: 0.8rem;
     }
 }
