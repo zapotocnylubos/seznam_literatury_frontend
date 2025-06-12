@@ -30,18 +30,18 @@ class LiteratureGroupContainer extends Component<AllProps> {
                 <small className={'d-print-none'}>
                     Minimální počet knih z této skupiny:&nbsp;
                     <span className={isRequiredSelectedBooksCountInGroupMet ? 'text-success' : 'text-danger'}>
-                        ({getSelectedBooksInGroupCount} / {literatureGroup.min_count})
+                        ({getSelectedBooksInGroupCount}&nbsp;/&nbsp;{literatureGroup.min_count})
                     </span>
                 </small>
                 <Table size="sm" responsive>
                     <thead>
                     <tr>
-                        <th className={'d-print-none'}>Vybrat</th>
-                        <th>Číslo titulu</th>
-                        <th className={'d-none d-print-block'}>Číslo otázky</th>
-                        <th>Jméno a příjmení autora</th>
-                        <th>Název titulu</th>
-                        <th>Literární forma</th>
+                        <th className={'d-print-none col-1'}>Vybrat</th>
+                        <th className={'col-1 pr-3'}>Číslo&nbsp;titulu</th>
+                        <th className={'d-none d-print-table-cell col-1 pr-3'}>Číslo&nbsp;otázky</th>
+                        <th className={'col-4'}>Jméno a příjmení autora</th>
+                        <th className={'col-4'}>Název titulu</th>
+                        <th className={'col-2'}>Literární forma</th>
                     </tr>
                     </thead>
                     <tbody>
