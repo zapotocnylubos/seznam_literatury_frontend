@@ -28,8 +28,8 @@
     "typescript": "3.3.3333"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "cross-env REACT_APP_API_ENDPOINT=http://b2015zapolu.delta-studenti.cz/maturitni-cetba react-scripts build",
+    "start": "cross-env REACT_APP_API_ENDPOINT=https://maturita.delta-www.cz/cetba react-scripts start",
+    "build": "cross-env REACT_APP_API_ENDPOINT=https://maturita.delta-www.cz/cetba react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
