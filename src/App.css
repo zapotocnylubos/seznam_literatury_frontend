@@ -23,3 +23,7 @@
         font-size: 0.8rem;
     }
 }
+
+.table-success td {
+    border-color: #dee2e6;
+}

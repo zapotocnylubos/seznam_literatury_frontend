@@ -39,7 +39,7 @@ class BookContainer extends Component<AllProps> {
 
         const trClass = classNames({
             'd-print-none': !isBookSelectedInGroup,
-            'table-active': isBookSelectedInGroup
+            'table-success': isBookSelectedInGroup,
         });
 
         const trStyles = {
@@ -59,7 +59,7 @@ class BookContainer extends Component<AllProps> {
                                 onClick={(event: any) => event.stopPropagation()}/>
                 </td>
                 <td>{getBookIndex(book) + 1}</td>
-                <td className={'d-none d-print-block'}>{getSelectedBookIndex(book) + 1}</td>
+                <td className={'d-none d-print-table-cell'}>{getSelectedBookIndex(book) + 1}</td>
                 <td>{book.author}</td>
                 <td>{book.title}</td>
                 <td>{book.literature_form}</td>
