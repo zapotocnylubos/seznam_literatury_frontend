@@ -62,11 +62,10 @@ class LiteratureSetContainer extends Component<AllProps> {
             <div>
                 <Row className={'d-none d-print-flex pb-3'}>
                     <Col xs={3} className={'text-center'}>
-                        <img style={{maxHeight: '75px'}} src={logo} alt="DELTA logo"/>
+                        <img style={{maxHeight: '1.2cm'}} src={logo} alt="DELTA logo"/>
                     </Col>
                     <Col xs={9} className={'d-inline-flex align-items-center text-center'}>
-                        DELTA - Střední škola informatiky a ekonomie, Základní škola<br/>
-                        a Mateřská škola, s.r.o., Ke Kamenci 151, Pardubice
+                        DELTA - Střední škola informatiky a ekonomie s.r.o., Ke Kamenci 151, Pardubice
                     </Col>
                 </Row>
                 <Row className={'mt-4'}>
@@ -122,12 +121,12 @@ class LiteratureSetContainer extends Component<AllProps> {
                     <p className="mb-0">
                         Požadovaný počet knih:&nbsp;
                         <span className={isRequiredBookCountMet ? 'text-success' : 'text-danger'}>
-                        ({flattenedSelectedBooksCount} / {required_book_count})
+                        ({flattenedSelectedBooksCount}&nbsp;/&nbsp;{required_book_count})
                     </span>
                     </p>
                     <p className="mb-0">Maximální počet knih od stejného autora:&nbsp;
                         <span className={!isMaxSelectedBooksForAuthorExceeded ? 'text-success' : 'text-danger'}>
-                            ({maxSelectedBooksForAuthor} / {author_max_count})
+                            ({maxSelectedBooksForAuthor}&nbsp;/&nbsp;{author_max_count})
                         </span>
                     </p>
 
@@ -138,7 +137,7 @@ class LiteratureSetContainer extends Component<AllProps> {
                                 {literature_form}:&nbsp;
                                 <span
                                     className={isRequiredLiteratureFormCountMet(literature_form_id) ? 'text-success' : 'text-danger'}>
-                                    ({getRequiredLiteratureFormSelectedBooksCount(literature_form_id)} / {min_count})
+                                    ({getRequiredLiteratureFormSelectedBooksCount(literature_form_id)}&nbsp;/&nbsp;{min_count})
                                 </span>{index !== required_literature_forms.length - 1 && ", "}
                             </span>
                         )}
