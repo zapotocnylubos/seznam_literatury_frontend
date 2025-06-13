@@ -11,6 +11,11 @@ const store = configureStore({
         loading: false,
         data: null
     },
+    personalDetails: {
+        name: '',
+        class: '',
+        year: ''
+    },
     books: {
         selectedBooks: []
     }

@@ -7,6 +7,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button'
 
+import PersonalDetails from "../personal-details/personal-details";
+
 import { getFlattenedSelectedBooks } from "../../selectors/selected-book.selector";
 import {
     getMaxSelectedBooksForAuthor,
@@ -68,38 +70,9 @@ class LiteratureSetContainer extends Component<AllProps> {
                         DELTA - Střední škola informatiky a ekonomie s.r.o., Ke Kamenci 151, Pardubice
                     </Col>
                 </Row>
-                <Row className={'mt-4'}>
+                <Row className={'mt-4 pb-2'}>
                     <Col sm={9}>
-                        <Form.Group as={Row} className={'mb-1'}>
-                            <Col xs={4} className={'d-flex align-items-center'}>
-                                <Form.Label className={'mb-0'}>
-                                    Jméno a příjmení:
-                                </Form.Label>
-                            </Col>
-                            <Col xs={8}>
-                                <Form.Control type="text"/>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className={'mb-1'}>
-                            <Col xs={4} className={'d-flex align-items-center'}>
-                                <Form.Label className={'mb-0'}>
-                                    Třída:
-                                </Form.Label>
-                            </Col>
-                            <Col xs={8}>
-                                <Form.Control type="text"/>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className={'mb-1'}>
-                            <Col xs={4} className={'d-flex align-items-center'}>
-                                <Form.Label className={'mb-0'}>
-                                    Školní rok:
-                                </Form.Label>
-                            </Col>
-                            <Col xs={8}>
-                                <Form.Control type="text"/>
-                            </Col>
-                        </Form.Group>
+                        <PersonalDetails/>
                     </Col>
                     <Col sm={3} className={'d-flex align-items-center'}>
                         {!isFormValid && <OverlayTrigger
