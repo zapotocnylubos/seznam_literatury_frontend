@@ -49,12 +49,14 @@ class PersonalDetails extends Component<AllProps> {
             <>
                 <Form.Group as={Row} className={'mb-1'}>
                     <Col xs={4} className={'d-flex align-items-center'}>
-                        <Form.Label className={'mb-0'}>
+                        <Form.Label className={'mb-0'} htmlFor="personal-details-name">
                             Jméno a příjmení:
                         </Form.Label>
                     </Col>
                     <Col xs={8}>
                         <Form.Control
+                            size="sm"
+                            id="personal-details-name"
                             type="text"
                             onChange={(event: any) => setPersonName(event.target.value)}
                             isInvalid={!this.props.isPersonalDetailsNameFilled}
@@ -63,12 +65,14 @@ class PersonalDetails extends Component<AllProps> {
                 </Form.Group>
                 <Form.Group as={Row} className={'mb-1'}>
                     <Col xs={4} className={'d-flex align-items-center'}>
-                        <Form.Label className={'mb-0'}>
+                        <Form.Label className={'mb-0'} htmlFor="personal-details-class">
                             Třída:
                         </Form.Label>
                     </Col>
                     <Col xs={8}>
                         <Form.Control
+                            size="sm"
+                            id="personal-details-class"
                             type="text"
                             onChange={(event: any) => setPersonClass(event.target.value)}
                             isInvalid={!this.props.isPersonalDetailsClassFilled}
@@ -78,12 +82,14 @@ class PersonalDetails extends Component<AllProps> {
                 </Form.Group>
                 <Form.Group as={Row} className={'mb-1'}>
                     <Col xs={4} className={'d-flex align-items-center'}>
-                        <Form.Label className={'mb-0'}>
+                        <Form.Label className={'mb-0'} htmlFor="personal-details-year">
                             Školní rok:
                         </Form.Label>
                     </Col>
                     <Col xs={8}>
                         <Form.Control
+                            size="sm"
+                            id="personal-details-year"
                             type="text"
                             onChange={(event: any) => setPersonYear(event.target.value)}
                             isInvalid={!this.props.isPersonalDetailsYearFilled}
