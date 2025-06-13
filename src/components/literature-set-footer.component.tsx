@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 class LiteratureSetFooterComponent extends Component {
     render() {
         return (
-            <Row>
+            <Row className={'mb-2'}>
                 <Col>
                     Datum: {new Date().toLocaleDateString('cs-CZ', {
                         year: 'numeric',
