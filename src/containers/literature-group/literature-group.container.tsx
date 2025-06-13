@@ -40,13 +40,13 @@ class LiteratureGroupContainer extends Component<AllProps> {
                         <th className={'col-1 pr-3'}>Číslo&nbsp;titulu</th>
                         <th className={'d-none d-print-table-cell col-1 pr-3'}>Číslo&nbsp;otázky</th>
                         <th className={'col-4'}>Jméno a příjmení autora</th>
-                        <th className={'col-4'}>Název titulu</th>
-                        <th className={'col-2'}>Literární forma</th>
+                        <th className={'col-5'}>Název titulu</th>
+                        <th className={'col-1'}>Literární&nbsp;forma</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {literatureGroup.books.map((book, index) => <BookContainer key={index} groupId={literatureGroup.id}
-                                                                               book={book}/>)}
+                    {literatureGroup.books.map((book, index) =>
+                        <BookContainer key={index} groupId={literatureGroup.id} book={book}/>)}
                     </tbody>
                 </Table>
             </div>
