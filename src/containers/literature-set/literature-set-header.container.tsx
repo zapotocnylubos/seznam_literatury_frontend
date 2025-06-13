@@ -69,33 +69,39 @@ class LiteratureSetContainer extends Component<AllProps> {
                     </Col>
                 </Row>
                 <Row className={'mt-4'}>
-                    <Col sm={8}>
+                    <Col sm={9}>
                         <Form.Group as={Row} className={'mb-1'}>
-                            <Col xs={5}>
-                                <Form.Label>Jméno a příjmení:</Form.Label>
+                            <Col xs={4} className={'d-flex align-items-center'}>
+                                <Form.Label className={'mb-0'}>
+                                    Jméno a příjmení:
+                                </Form.Label>
                             </Col>
-                            <Col xs={7}>
-                                <Form.Control size="sm" type="text"/>
+                            <Col xs={8}>
+                                <Form.Control type="text"/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className={'mb-1'}>
-                            <Col xs={5}>
-                                <Form.Label>Třída:</Form.Label>
+                            <Col xs={4} className={'d-flex align-items-center'}>
+                                <Form.Label className={'mb-0'}>
+                                    Třída:
+                                </Form.Label>
                             </Col>
-                            <Col xs={7}>
-                                <Form.Control size="sm" type="text"/>
+                            <Col xs={8}>
+                                <Form.Control type="text"/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className={'mb-1'}>
-                            <Col xs={5}>
-                                <Form.Label>Školní rok:</Form.Label>
+                            <Col xs={4} className={'d-flex align-items-center'}>
+                                <Form.Label className={'mb-0'}>
+                                    Školní rok:
+                                </Form.Label>
                             </Col>
-                            <Col xs={7}>
-                                <Form.Control size="sm" type="text"/>
+                            <Col xs={8}>
+                                <Form.Control type="text"/>
                             </Col>
                         </Form.Group>
                     </Col>
-                    <Col sm={4} className={'d-flex align-items-center'}>
+                    <Col sm={3} className={'d-flex align-items-center'}>
                         {!isFormValid && <OverlayTrigger
                             placement="bottom"
                             overlay={
