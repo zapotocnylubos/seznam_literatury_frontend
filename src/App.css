@@ -8,6 +8,8 @@
         border: none !important;
         box-shadow: none !important;
         outline: none !important;
+        font-weight: bold !important;
+        font-size: 1.2rem !important;
     }
 
     h2#title {
