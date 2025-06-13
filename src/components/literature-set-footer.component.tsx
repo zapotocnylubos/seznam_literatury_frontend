@@ -8,7 +8,11 @@ class LiteratureSetFooterComponent extends Component {
         return (
             <Row>
                 <Col>
-                    Datum:
+                    Datum: {new Date().toLocaleDateString('cs-CZ', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                    })}
                 </Col>
                 <Col>
                     Podpis:
