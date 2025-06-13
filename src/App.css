@@ -27,3 +27,7 @@
 .table-success td {
     border-color: #dee2e6;
 }
+
+input {
+    background-image: none !important;
+}
