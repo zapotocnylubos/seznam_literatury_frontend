@@ -2,7 +2,7 @@
   "name": "seznam_literatury",
   "version": "0.2.0",
   "private": true,
-  "homepage": "https://b2015zapolu.delta-studenti.cz/maturitni-cetba/formular",
+  "homepage": "https://maturita.delta-www.cz/cetba/formular-test/",
   "dependencies": {
     "@types/classnames": "^2.2.7",
     "@types/jest": "24.0.9",
@@ -41,5 +41,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "engines": {
+    "node": "16.x"
+  }
 }
