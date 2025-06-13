@@ -71,10 +71,10 @@ class LiteratureSetContainer extends Component<AllProps> {
                     </Col>
                 </Row>
                 <Row className={'mt-4 pb-2'}>
-                    <Col sm={9}>
+                    <Col sm={6}>
                         <PersonalDetails/>
                     </Col>
-                    <Col sm={3} className={'d-flex align-items-center'}>
+                    <Col sm={6} className={'d-flex align-items-center'}>
                         {!isFormValid && <OverlayTrigger
                             placement="bottom"
                             overlay={
