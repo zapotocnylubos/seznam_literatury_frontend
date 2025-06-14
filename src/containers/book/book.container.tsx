@@ -50,7 +50,7 @@ class BookContainer extends Component<AllProps> {
             <tr className={trClass}
                 style={trStyles}
                 onClick={() => canToggleSelection && toggleSelection(groupId, book)}>
-                <td className={'d-print-none'}>
+                <td className={'d-print-none align-middle'}>
                     <Form.Check disabled={!canToggleSelection}
                                 type="checkbox"
                                 className={'d-flex'}
@@ -58,11 +58,19 @@ class BookContainer extends Component<AllProps> {
                                 onChange={() => toggleSelection(groupId, book)}
                                 onClick={(event: any) => event.stopPropagation()}/>
                 </td>
-                <td>{getBookIndex(book) + 1}</td>
-                <td className={'d-none d-print-table-cell'}>{getSelectedBookIndex(book) + 1}</td>
-                <td>{book.author}</td>
-                <td>{book.title}</td>
-                <td>{book.literature_form}</td>
+                <td className={'align-middle'}>
+                    {getBookIndex(book) + 1}
+                </td>
+                <td className={'d-none d-print-table-cell align-middle'}>{getSelectedBookIndex(book) + 1}</td>
+                <td className={'align-middle'}>
+                    {book.author}
+                </td>
+                <td className={'align-middle'}>
+                    {book.title}
+                </td>
+                <td className={'align-middle'}>
+                    {book.literature_form}
+                </td>
             </tr>
         )
     }
