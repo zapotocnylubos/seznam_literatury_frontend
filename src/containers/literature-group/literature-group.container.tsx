@@ -36,23 +36,21 @@ class LiteratureGroupContainer extends Component<AllProps> {
                 <Table size="sm" responsive>
                     <thead>
                     <tr>
-                        <th className={'d-print-none'} style={{width: '5%'}}>
-                            Vybrat
+                        <th className={'d-print-none'} style={{width: '3%'}}></th>
+                        <th style={{width: '5%'}}>
+                            Číslo titulu
                         </th>
-                        <th className={'pr-3'} style={{width: '10%'}}>
-                            Číslo&nbsp;titulu
+                        <th className={'d-none d-print-table-cell'} style={{width: '5%'}}>
+                            Číslo otázky
                         </th>
-                        <th className={'d-none d-print-table-cell pr-3'} style={{width: '10%'}}>
-                            Číslo&nbsp;otázky
-                        </th>
-                        <th style={{width: '30%'}}>
+                        <th style={{width: '35%'}}>
                             Jméno a příjmení autora
                         </th>
                         <th style={{width: '45%'}}>
                             Název titulu
                         </th>
                         <th style={{width: '10%'}}>
-                            Literární&nbsp;forma
+                            Literární forma
                         </th>
                     </tr>
                     </thead>
