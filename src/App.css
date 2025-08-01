@@ -24,6 +24,10 @@
     table {
         font-size: 0.8rem;
     }
+
+    .align-items-print-center {
+        align-items: center !important;
+    }
 }
 
 .table-success td {

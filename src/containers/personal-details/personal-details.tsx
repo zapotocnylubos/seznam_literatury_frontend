@@ -11,20 +11,19 @@ import {
     isPersonalDetailsClassFilled,
     isPersonalDetailsYearFilled,
 } from "../../selectors/personal-details.selector";
-import { isFormValid } from "../../selectors/form-errors.selector";
 
 import {
     setPersonName,
     setPersonClass,
     setPersonYear,
 } from '../../store/personal-details/actions'
+import { PersonalDetailsState } from "../../store/personal-details/types";
 
 interface PropsFromState {
+    personalDetails: PersonalDetailsState,
     isPersonalDetailsNameFilled: boolean,
     isPersonalDetailsClassFilled: boolean,
     isPersonalDetailsYearFilled: boolean,
-
-    isFormValid: boolean,
 }
 
 interface PropsFromDispatch {
@@ -37,9 +36,8 @@ type AllProps = PropsFromState & PropsFromDispatch;
 
 class PersonalDetails extends Component<AllProps> {
     render() {
-        const {isFormValid} = this.props;
-
         const {
+            personalDetails,
             setPersonName,
             setPersonClass,
             setPersonYear,
@@ -47,8 +45,8 @@ class PersonalDetails extends Component<AllProps> {
 
         return (
             <>
-                <Form.Group as={Row} className={'mb-1'}>
-                    <Col xs={4} className={'d-flex align-items-center'}>
+                <Form.Group as={Row} className={'mb-2'}>
+                    <Col xs={4} className={'d-flex align-items-print-center'}>
                         <Form.Label className={'mb-0'} htmlFor="personal-details-name">
                             Jméno a příjmení:
                         </Form.Label>
@@ -63,8 +61,8 @@ class PersonalDetails extends Component<AllProps> {
                         />
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} className={'mb-1'}>
-                    <Col xs={4} className={'d-flex align-items-center'}>
+                <Form.Group as={Row} className={'mb-2'}>
+                    <Col xs={4} className={'d-flex align-items-print-center'}>
                         <Form.Label className={'mb-0'} htmlFor="personal-details-class">
                             Třída:
                         </Form.Label>
@@ -77,11 +75,13 @@ class PersonalDetails extends Component<AllProps> {
                             onChange={(event: any) => setPersonClass(event.target.value)}
                             isInvalid={!this.props.isPersonalDetailsClassFilled}
                         />
-
+                        <Form.Text className="text-muted d-print-none">
+                            Např. 4.A, 4.MA
+                        </Form.Text>
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} className={'mb-1'}>
-                    <Col xs={4} className={'d-flex align-items-center'}>
+                <Form.Group as={Row} className={'mb-2'}>
+                    <Col xs={4} className={'d-flex align-items-print-center'}>
                         <Form.Label className={'mb-0'} htmlFor="personal-details-year">
                             Školní rok:
                         </Form.Label>
@@ -91,9 +91,13 @@ class PersonalDetails extends Component<AllProps> {
                             size="sm"
                             id="personal-details-year"
                             type="text"
+                            value={personalDetails.year}
                             onChange={(event: any) => setPersonYear(event.target.value)}
                             isInvalid={!this.props.isPersonalDetailsYearFilled}
                         />
+                        <Form.Text className="text-muted d-print-none">
+                            Rok maturity, např. {new Date().getFullYear()}
+                        </Form.Text>
                     </Col>
                 </Form.Group>
             </>
@@ -102,11 +106,10 @@ class PersonalDetails extends Component<AllProps> {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
+    personalDetails: state.personalDetails,
     isPersonalDetailsNameFilled: isPersonalDetailsNameFilled(state),
     isPersonalDetailsClassFilled: isPersonalDetailsClassFilled(state),
     isPersonalDetailsYearFilled: isPersonalDetailsYearFilled(state),
-
-    isFormValid: isFormValid(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
