@@ -14,7 +14,7 @@ const store = configureStore({
     personalDetails: {
         name: '',
         class: '',
-        year: ''
+        year: new Date().getFullYear().toString()
     },
     books: {
         selectedBooks: []

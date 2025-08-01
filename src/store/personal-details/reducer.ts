@@ -5,7 +5,7 @@ import { PersonalDetailsActionTypes, PersonalDetailsState } from './types'
 const initialState: PersonalDetailsState = {
     name: '',
     class: '',
-    year: ''
+    year: '',
 };
 
 const reducer: Reducer<PersonalDetailsState> = (state = initialState, action) => {
